@@ -1,0 +1,230 @@
+@use 'reset';
+
+@function fluid($min-value, $max-value) {
+  @return clamp(
+    #{$min-value},
+    calc(
+      #{$min-value} + (#{$max-value} - #{$min-value}) * ((100vw - 320px) /
+            (1920px - 320px))
+    ),
+    #{$max-value}
+  );
+}
+
+$color-primary: #ff3f3a;
+$color-danger: #ff4242;
+$color-success: #03cea4;
+$color-info: #5a87fc;
+$color-warning: #f89828;
+$gray-300: #e5e8ed;
+$gray-400: #d7dadd;
+$gray-600: #9a9ca5;
+$gray-700: #787a80;
+$gray-800: #424551;
+
+.u-mb-60 {
+  margin-bottom: 60px;
+}
+
+.u-mb-80 {
+  margin-bottom: 80px;
+}
+
+.u-mb-85 {
+  margin-bottom: 85px;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 44px 15px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  background: url('./src/images/dots.svg') no-repeat top 50px right -45px,
+    url('./src/images/shapes.svg') no-repeat top 1104px right 72px,
+    url('./src/images/shapes2.svg') no-repeat top 687px left 56px;
+
+  &__titles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__subtitle {
+    font-size: fluid(12px, 16px);
+    line-height: 150%;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    font-size: fluid(24px, 46px);
+    line-height: 130%;
+    font-weight: 900;
+  }
+}
+
+.navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: fluid(20px, 100px);
+
+  &__tabs {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  &__tab {
+    display: flex;
+    gap: 4px;
+    padding: 10px 20px;
+    font-weight: 700;
+    border-radius: 4px;
+    color: $gray-600;
+
+    &-title {
+      font-size: fluid(12px, 16px);
+      line-height: 160%;
+    }
+
+    &-count {
+      font-size: fluid(8px, 10px);
+      line-height: 150%;
+    }
+  }
+
+  &__tab--active {
+    outline: 1px solid $color-primary;
+    outline-offset: -1px;
+    color: $color-primary;
+  }
+}
+
+.search {
+  position: relative;
+  flex-grow: 1;
+
+  &__input {
+    width: 100%;
+    padding: 12px 16px;
+    padding-right: 48px;
+    border: 1px solid $gray-400;
+    border-radius: 4px;
+    background-color: white;
+
+    &::placeholder {
+      font-size: 14px;
+      line-height: 150%;
+      color: $gray-600;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 14px;
+    right: 16px;
+  }
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+
+  &__not-found {
+    grid-column: 1 / -1;
+    place-self: center;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $gray-300;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: white;
+  box-shadow: 0 80px 80px -20px rgba($gray-600, 0.08),
+    0 30px 24px -10px rgba($gray-600, 0.05),
+    0 12px 10px -6px rgba($gray-600, 0.04), 0 4px 4px -4px rgba($gray-600, 0.03);
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 24px;
+  }
+
+  &__title {
+    font-size: 20px;
+    line-height: 150%;
+    font-weight: 700;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: $gray-700;
+    font-size: 18px;
+    line-height: 150%;
+  }
+
+  &__category {
+    padding: 1px 8px;
+    font-size: 14px;
+    line-height: 150%;
+    border-radius: 4px;
+    color: white;
+
+    &--marketing {
+      background-color: $color-success;
+    }
+
+    &--management {
+      background-color: $color-info;
+    }
+
+    &--hr {
+      background-color: $color-warning;
+    }
+
+    &--design {
+      background-color: #f52f6e;
+    }
+
+    &--development {
+      background-color: #7772f1;
+    }
+  }
+
+  &__divider {
+    height: 16px;
+    border-left: 1px solid $gray-700;
+    border-radius: 1px;
+  }
+
+  &__price {
+    color: $color-danger;
+    font-weight: 700;
+  }
+}
+
+.button-load-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  font-size: 16px;
+  line-height: 160%;
+  color: $gray-800;
+}
